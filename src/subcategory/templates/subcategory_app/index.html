@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Category & Subcategory</h1>
+    <ul>
+    {% for category in categories %}
+        <p>Category : {{category.title}}</p>
+        {% for subcatogory in category.parent.all %}
+        <li>
+            {{subcatogory}}
+        </li>
+        {% endfor %}
+    {% endfor %}
+    </ul>
+    <h1>Products</h1>
+    {% for product in products %}
+    <p>Name: {{product.title}} Category: {{product.category.parent.title}}</p>
+    {% endfor %}
+</body>
+</html>

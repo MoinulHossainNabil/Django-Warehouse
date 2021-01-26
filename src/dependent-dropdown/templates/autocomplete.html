@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="mt-3 d-flex m-auto" id="myForm" action="{% url 'base_app:autocomplete' %}" style="width: 50%;">
+    <input class="form-control" id="personName" type="text" name="person">
+    <button class="btn btn-outline-success ml-2">Submit</button>
+</form>
+{% endblock %}
+{% block script %}
+{% load static %}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'js/autocomplete.js' %}"></script>
+{% endblock script %}

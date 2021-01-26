@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-12">
+            <h3 class="text-center text-monospace">Person List</h3>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <ul class="list-group pl-0">
+                {% for person in persons %}
+                <li class="list-group-item text-center d-flex">
+                    {{person}}
+                    <a class="ml-auto btn btn-warning px-3 border text-decoration-none text-black" href="{% url 'base_app:update-person' pk=person.pk %}">Update</a>
+                    <a class="ml-2 btn btn-danger px-3 border text-decoration-none text-black" href="{% url 'base_app:delete-person' pk=person.pk %}">Remove</a>
+                </li>
+                {% endfor %}
+                <li class="list-group-item text-right">
+                    <a class="btn btn-success btn-block px-3 border text-decoration-none text-black" href="{% url 'base_app:add-person' %}">Create New Entry</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% block body_block %}
+<div class="container">
+  <form
+    class="row my-3 justify-content-center"
+    action="{% url 'authentication_app:signup' %}"
+    method="POST"
+  >
+    {% csrf_token %}
+    <div class="form-group col-md-8">
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+          {{ error }}
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group col-md-8">
+      <label for="username">Username</label>
+      {{form.username}}
+      {% if form.username.help_text %}
+      {{form.username.help_text}}
+      {% endif %}
+      {% if form.username.errors %}
+      <p>{{form.username.errors}}</p>
+      {% endif %}
+    </div>
+    <div class="form-group col-md-8">
+        <label for="username">Email</label>
+        {{form.email}}
+        {% if form.email.help_text %}
+        {{form.email.help_text}}
+        {% endif %}
+        {% if form.errors.email %}
+      <p>{{form.errors.email}}</p>
+      {% endif %}
+      </div>
+      <div class="form-group col-md-8">
+        <label for="password1">Password</label>
+        {{form.password1}}
+        {% if form.password1.help_text %}
+        {{form.password1.help_text}}
+        {% endif %}
+        {% if form.password1.errors %}
+      <p>{{form.password1.errors}}</p>
+      {% endif %}
+      </div>
+      <div class="form-group col-md-8">
+        <label for="username">Confirm Password</label>
+        {{form.password2}}
+        {% if form.password2.errors %}
+      <p>{{form.password2.errors}}</p>
+      {% endif %}
+      </div>
+      <div class="form-group col-md-8">
+        <button type="submit" class="btn btn-outline-primary btn-block">Sign up</button>
+      </div>
+  </form>
+</div>
+<script>
+  const helpText = document.querySelector('ul');
+  helpText.style.padding = 0;
+  helpText.style.listStyle = "none";
+
+</script>
+{% endblock body_block %}
+

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body_block %}
+<h3>Home</h3>
+{% if not request.user.is_authenticated %}
+    <a href="{% url 'authentication_app:login' %}">Login</a>
+{% else %}
+<a href="{% url 'authentication_app:logout' %}">Logout</a>
+{% endif %}
+<a href="{% url 'authentication_app:signup' %}">Signup</a>
+{% endblock body_block %}

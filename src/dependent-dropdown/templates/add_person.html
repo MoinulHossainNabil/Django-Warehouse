@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-12">
+            {% if not form.instance.pk %}
+            <h3 class="text-center">Add New Person</h3>
+            {% else %}
+            <h3 class="text-center">Update Person</h3>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <form class="col-md-8" method="POST">
+            {% csrf_token %}
+            {{form|crispy}}
+            {% if not form.instance.pk %}
+            <button class="btn btn-outline-success btn-block">Add Person</button>
+            {% else %}
+            <button class="btn btn-outline-success btn-block">Update Person</button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+<script>
+    const country = document.getElementById('id_country');
+    const cities = document.getElementById('id_city');
+    const host = "http://localhost:8000";
+    const endpoint = "/base/country-cities/";
+    country.addEventListener('change', function(event) {
+        event.preventDefault();
+        let selected_country_id = event.target.value;
+        let url = host + endpoint;
+        fetch(`${url}${selected_country_id}/`)
+        .then(response=> {
+            return response.json();
+        })
+        .then(data=> {
+            let cities_html = `<option value="">------</option>`;
+            for(let city of data) {
+                cities_html += `<option value=${parseInt(city.id)}>${city.name}</option>`;
+            }
+            cities.innerHTML = cities_html;
+        })
+        .catch(error=> {
+            console.log(error);
+        })
+    })
+</script>
+{% endblock %}
