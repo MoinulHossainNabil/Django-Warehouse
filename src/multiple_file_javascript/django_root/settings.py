@@ -153,11 +153,11 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000'
 ]
 
-#Configuration for sending email
+# Configuration for sending email
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
